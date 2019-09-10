@@ -9,7 +9,7 @@
           :src="require('../assets/logo.svg')"
           class="my-3"
           contain
-          height="200"
+          height="150"
         ></v-img>
       </v-flex>
 
@@ -21,15 +21,26 @@
           With Vue.js, Vuetify and Axios
         </p>
       </v-flex>
-
     </v-layout>
+
+    <v-layout>
+      <v-flex mb-12>
+        <employee-table/>
+      </v-flex>
+    </v-layout>
+
   </v-container>
 </template>
 
 <script>
+import EmployeeTable from './EmployeeTable'
+
 export default {
   data: () => ({
     
-  })
+  }),
+  components: {
+    EmployeeTable
+  }
 }
 </script>
