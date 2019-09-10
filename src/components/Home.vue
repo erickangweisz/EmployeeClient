@@ -15,7 +15,7 @@
 
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">
-          CRUD Employee
+          CRUD Employees
         </h1>
         <p class="subheading font-weight-regular">
           With Vue.js, Vuetify and Axios
