@@ -5,7 +5,6 @@
       <v-toolbar-title class="headline text-uppercase">
         <span>Employees</span>
         <span class="font-weight-light">|VUETIFY<span style="color: #1697F6">&</span>AXIOS 
-        <i class="material-icons">supervised_user_circle</i>
         </span>
       </v-toolbar-title>
     </v-app-bar>
@@ -18,15 +17,13 @@
 </template>
 
 <script>
-import Home from './components/Home'
-
 export default {
   name: 'App',
   components: {
-    Home
+    
   },
   data: () => ({
-    //
+    
   })
 }
 </script>

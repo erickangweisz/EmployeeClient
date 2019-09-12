@@ -14,7 +14,7 @@ export default {
     name: 'employee-table',
     data () {
         return {
-            employees: null,
+            url: 'https://localhost:44349/api/employee',
             headers: [
                 { text: 'Id', value: 'id' },
                 { text: 'Firstname', value: 'firstname' },
@@ -22,16 +22,21 @@ export default {
                 { text: 'Email', value: 'email' },
                 { text: 'Cellphone', value: 'cellphone' }
             ],
-            desserts: this.employees
+            desserts: []
+        }
+    },
+    methods: {
+        getEmployees() {
+            axios
+                .get(this.url)
+                .then(response => this.desserts = response.data)
+                .catch(console.error = (message) => { // eslint-disable-line no-console
+                    throw new Error(message)
+                })
         }
     },
     mounted () {
-        axios
-            .get(`https://localhost:44349/api/employee`)
-            .then(response => { 
-                this.employees = response['data']
-                console.log(this.employees)
-            })
+        this.getEmployees()
     }
 }
 </script>

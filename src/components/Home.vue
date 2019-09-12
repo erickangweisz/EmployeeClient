@@ -18,7 +18,9 @@
           CRUD Employees
         </h1>
         <p class="subheading font-weight-regular">
-          With Vue.js, Vuetify and Axios
+          With <strong>Vue.js</strong>, 
+          <strong>Vuetify</strong> and 
+          <strong>Axios</strong>
         </p>
       </v-flex>
     </v-layout>
