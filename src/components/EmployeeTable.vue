@@ -3,6 +3,7 @@
     :headers="headers"
     :items="desserts"
     :items-per-page="5"
+    @click:row="getEmployee($event)"
     class="elevation-1"
   ></v-data-table>
 </template>
@@ -33,6 +34,9 @@ export default {
                 .catch(console.error = (message) => { // eslint-disable-line no-console
                     throw new Error(message)
                 })
+        },
+        getEmployee(event) {
+            console.log(event)
         }
     },
     mounted () {
