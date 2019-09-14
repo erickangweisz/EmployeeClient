@@ -1,11 +1,46 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    :items-per-page="5"
-    @click:row="getEmployee($event)"
-    class="elevation-1"
-  ></v-data-table>
+    <v-container>
+        <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :items-per-page="5"
+            @click:row="getEmployee($event)"
+            class="elevation-1"
+        ></v-data-table>
+
+        <v-dialog
+            v-model="dialog"
+            width="500">
+            <v-card>
+                <v-card-title>Employee</v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field label="Email*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field label="Password*" type="password" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field label="Email*" type="email" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field label="cellphone*" type="number" required></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions text-right>
+                    <div class="flex-grow-1"></div>
+                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                    <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-container>
 </template>
 
 <script>
@@ -23,7 +58,8 @@ export default {
                 { text: 'Email', value: 'email' },
                 { text: 'Cellphone', value: 'cellphone' }
             ],
-            desserts: []
+            desserts: [],
+            dialog: false
         }
     },
     methods: {
@@ -36,6 +72,7 @@ export default {
                 })
         },
         getEmployee(event) {
+            this.dialog = true
             console.log(event)
         }
     },
