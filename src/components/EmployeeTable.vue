@@ -5,7 +5,7 @@
             type="success"
             dismissible
             v-if="alert">
-            The User has been updated!
+            {{ alert_message }}
         </v-alert>
 
         <v-data-table
@@ -45,7 +45,7 @@
                             </v-col>
                             <v-col cols="12">
                                 <v-text-field 
-                                    label="cellphone*" 
+                                    label="Cellphone*" 
                                     v-model="employee.cellphone" 
                                     required></v-text-field>
                             </v-col>
@@ -58,6 +58,7 @@
                     <v-btn 
                         depressed 
                         color="error"
+                        @click="deleteEmployee()"
                         >Delete <i class="material-icons">delete</i>
                     </v-btn>
                     <div class="flex-grow-1"></div>
@@ -97,7 +98,8 @@ export default {
             desserts: [],
             employee: {},
             dialog: false,
-            alert: false
+            alert: false,
+            alert_message: ''
         }
     },
     methods: {
@@ -119,10 +121,21 @@ export default {
                 .then(response => { 
                     this.employee = response 
                     this.dialog = false
+                    this.alert_message = 'The employee has been updated!'
                     this.alert = true
                 })
                 .catch(console.error = (message) => { // eslint-disable-line no-console
                     throw new Error(message)
+                })
+        },
+        deleteEmployee() {
+            axios
+                .delete(`${this.url}/${this.employee.id}`)
+                .then(response => {
+                    // TODO: pending to develop row deleting reactive in table
+                    this.dialog = false
+                    this.alert_message = 'The employee has been deleted!'
+                    this.alert = true
                 })
         }
     },
