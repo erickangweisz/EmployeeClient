@@ -17,16 +17,29 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field label="Firstname*" :value="employee.firstname" required></v-text-field>
+                                <v-text-field 
+                                    label="Firstname*" 
+                                    v-model="employee.firstname" 
+                                    required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="Lastname*" :value="employee.lastname" required></v-text-field>
+                                <v-text-field 
+                                    label="Lastname*" 
+                                    v-model="employee.lastname" 
+                                    required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="Email*" :value="employee.email" type="email" required></v-text-field>
+                                <v-text-field 
+                                    label="Email*" 
+                                    v-model="employee.email" 
+                                    type="email" 
+                                    required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="cellphone*" :value="employee.cellphone" required></v-text-field>
+                                <v-text-field 
+                                    label="cellphone*" 
+                                    v-model="employee.cellphone" 
+                                    required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -35,8 +48,16 @@
                 <v-divider></v-divider>
                 <v-card-actions text-right>
                     <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+                    <v-btn 
+                        color="blue darken-1" 
+                        text 
+                        @click="dialog=false"
+                        >Close</v-btn>
+                    <v-btn 
+                        color="blue darken-1" 
+                        ext 
+                        @click="updateEmployee()"
+                        >Save</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -75,6 +96,14 @@ export default {
         getEmployee(event) {
             this.dialog = true
             this.employee = event
+        },
+        updateEmployee() {
+            axios
+                .put(`${this.url}/${this.employee.id}`, this.employee)
+                .then(response => this.employee = res, this.dialog = false)
+                .catch(console.error = (message) => { // eslint-disable-line no-console
+                    throw new Error(message)
+                })
         }
     },
     mounted () {
