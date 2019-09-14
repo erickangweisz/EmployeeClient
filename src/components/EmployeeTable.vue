@@ -17,16 +17,16 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field label="Email*" required></v-text-field>
+                                <v-text-field label="Firstname*" :value="employee.firstname" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="Password*" type="password" required></v-text-field>
+                                <v-text-field label="Lastname*" :value="employee.lastname" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="Email*" type="email" required></v-text-field>
+                                <v-text-field label="Email*" :value="employee.email" type="email" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field label="cellphone*" type="number" required></v-text-field>
+                                <v-text-field label="cellphone*" :value="employee.cellphone" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -59,7 +59,8 @@ export default {
                 { text: 'Cellphone', value: 'cellphone' }
             ],
             desserts: [],
-            dialog: false
+            dialog: false,
+            employee: {}
         }
     },
     methods: {
@@ -73,7 +74,7 @@ export default {
         },
         getEmployee(event) {
             this.dialog = true
-            console.log(event)
+            this.employee = event
         }
     },
     mounted () {
