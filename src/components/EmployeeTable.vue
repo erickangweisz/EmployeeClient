@@ -1,5 +1,13 @@
 <template>
     <v-container>
+        <v-alert 
+            v-model="alert"
+            type="success"
+            dismissible
+            v-if="alert">
+            The User has been updated!
+        </v-alert>
+
         <v-data-table
             :headers="headers"
             :items="desserts"
@@ -47,17 +55,24 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions text-right>
+                    <v-btn 
+                        depressed 
+                        color="error"
+                        >Delete <i class="material-icons">delete</i>
+                    </v-btn>
                     <div class="flex-grow-1"></div>
                     <v-btn 
                         color="blue darken-1" 
                         text 
                         @click="dialog=false"
-                        >Close</v-btn>
+                        >Close <i class="material-icons">clear</i>
+                    </v-btn>
                     <v-btn 
                         color="blue darken-1" 
                         ext 
                         @click="updateEmployee()"
-                        >Save</v-btn>
+                        >Save <i class="material-icons">save</i>
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -80,8 +95,9 @@ export default {
                 { text: 'Cellphone', value: 'cellphone' }
             ],
             desserts: [],
+            employee: {},
             dialog: false,
-            employee: {}
+            alert: false
         }
     },
     methods: {
@@ -100,7 +116,11 @@ export default {
         updateEmployee() {
             axios
                 .put(`${this.url}/${this.employee.id}`, this.employee)
-                .then(response => this.employee = res, this.dialog = false)
+                .then(response => { 
+                    this.employee = response 
+                    this.dialog = false
+                    this.alert = true
+                })
                 .catch(console.error = (message) => { // eslint-disable-line no-console
                     throw new Error(message)
                 })
